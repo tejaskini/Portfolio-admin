@@ -10,12 +10,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // In a real app, you might call /auth/me to verify
       setUser({ token });
     }
     setLoading(false);
   }, []);
 
+  // --- Login Function ---
   const login = async (username, password) => {
     const response = await api.post('/login', { username, password });
     const token = response.data.token || response.data.data?.token;
@@ -27,13 +27,35 @@ export const AuthProvider = ({ children }) => {
     return response;
   };
 
+  // --- Register Function (New) ---
+  const register = async (username, password, email, phone) => {
+    // This matches the 4 fields from your Register.jsx form
+    const response = await api.post('/register', { 
+      username, 
+      password, 
+      email, 
+      phone 
+    });
+    
+    // Most APIs return a token upon successful registration so the user is "logged in" immediately
+    const token = response.data.token || response.data.data?.token;
+    
+    if (token) {
+      localStorage.setItem('token', token);
+      setUser({ token });
+    }
+    
+    return response;
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    // Make sure to add 'register' to the value prop here
+    <AuthContext.Provider value={{ user, login, logout, register, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock, User, AlertCircle, ArrowRight } from 'lucide-react';
+import { Lock, User, AlertCircle, ArrowRight, LogIn } from 'lucide-react';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,7 +16,7 @@ const Login = () => {
     
     try {
       await login(username, password);
-      navigate('/');
+      navigate('/'); // Navigate to dashboard on success
     } catch (err) {
       setLocalError(err.response?.data?.message || 'Invalid credentials. Please try again.');
     }
@@ -80,24 +80,36 @@ const Login = () => {
               </div>
             )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
-            >
-              {loading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-              ) : (
-                <>
-                  Sign In <ArrowRight size={18} />
-                </>
-              )}
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3">
+              {/* Primary Action: Sign In */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
+              >
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <>
+                    Sign In <LogIn size={18} />
+                  </>
+                )}
+              </button>
+
+              {/* Secondary Action: Redirect to Register */}
+              <button
+                type="button"
+                onClick={() => navigate('/register')}
+                className="flex-1 py-3 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
+              >
+                Sign Up <ArrowRight size={18} />
+              </button>
+            </div>
           </form>
         </div>
 
         <p className="text-center mt-8 text-slate-500 text-sm">
-          &copy; 2026 Admin Portfolio CMS. All rights reserved.
+          &copy; 2026 Admin Portfolio - by Tejas Kini ❤️. All rights reserved.
         </p>
       </div>
     </div>

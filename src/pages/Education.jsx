@@ -90,6 +90,7 @@ const Education = () => {
           <button type="submit" className="w-full bg-blue-600 py-3 rounded-2xl font-bold hover:bg-blue-500 transition mt-4">Save Education</button>
         </form>
       </Modal>
+      
     </div>
   );
 };

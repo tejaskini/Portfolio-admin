@@ -7,6 +7,7 @@ import Experience from './pages/Experience';
 import Projects from './pages/Projects';
 import Education from './pages/Education';
 import Skills from './pages/Skills';
+import Register from './pages/Register'; // Import the new Register page
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} /> {/* New Register Route */}
           
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Dashboard />} />
