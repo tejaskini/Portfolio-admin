@@ -20,7 +20,7 @@ const Register = () => {
     
     try {
       // 1. Wait for the API to process the four mandatory fields
-      await register(username, password, email, phone); 
+      await register(username, password, email, phone, "web_user"); 
       
       // 2. Alert the user of success
       alert('Registration successful! Redirecting to login...');

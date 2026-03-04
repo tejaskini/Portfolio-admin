@@ -28,13 +28,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   // --- Register Function (New) ---
-  const register = async (username, password, email, phone) => {
+  const register = async (username, password, email, phone, role) => {
     // This matches the 4 fields from your Register.jsx form
     const response = await api.post('/register', { 
       username, 
       password, 
       email, 
-      phone 
+      phone,
+      role
     });
     
     // Most APIs return a token upon successful registration so the user is "logged in" immediately

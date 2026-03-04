@@ -8,6 +8,7 @@ import Projects from './pages/Projects';
 import Education from './pages/Education';
 import Skills from './pages/Skills';
 import Register from './pages/Register'; // Import the new Register page
+import Account from './pages/Account';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/experience" element={<Experience />} />
             <Route path="/education" element={<Education />} />
             <Route path="/skills" element={<Skills />} />
+            <Route path="/account" element={<Account />} /> {/* Placeholder for Account page, can be updated later */}
           </Route>
         </Routes>
       </BrowserRouter>
