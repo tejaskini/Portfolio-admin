@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
 import Modal from '../components/Modal';
+import { toast } from 'react-toastify';
 import { Plus, Github, ExternalLink, Trash2, Edit3 } from 'lucide-react';
 
 const Projects = () => {
@@ -19,6 +20,7 @@ const Projects = () => {
       const res = await api.get('/projects');
       setProjects(res.data.data);
     } catch (err) {
+      toast.error('Error fetching projects. Please try again.');
       console.error('Error fetching projects:', err);
     }
   };
@@ -61,15 +63,18 @@ const Projects = () => {
       if (editingId) {
         // PUT request for editing
         await api.put(`/projects/${editingId}`, payload);
+        toast.success('Project updated successfully!');
+
       } else {
         // POST request for new project
         await api.post('/projects', payload);
+        toast.success('Project published successfully!');
       }
       closeModal();
       fetchProjects();
     } catch (err) {
       console.error('Error saving project:', err);
-      alert('Error saving project. Please try again.');
+      toast.error('Error saving project. Please try again.');
     }
   };
 
